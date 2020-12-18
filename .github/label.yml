@@ -1,4 +1,14 @@
-critical:
-    - '(critical|urgent)'
 enhancement:
-    - '(ENH)'
+  - 'ENH'
+bug:
+  - 'BUG'
+refactoring:
+  - 'REF'
+testing:
+  - 'TEST'
+documentation:
+  - 'DOC'
+CI:
+  - 'CI'
+GitHub:
+  - 'GitHub'
