@@ -7,21 +7,22 @@ on:
     types: [closed]
 
 jobs:
-  
+
   release:
-    
+
     name: Release
-    
+
     runs-on: ubuntu-latest
-    
-    if: &{{ github.event.pull_request.merged == true && github.base_ref == 'main' && contains(github.base_ref, 'release/') }}
-    
+
+    if: ${{ github.event.pull_request.merged == true && github.base_ref == 'main' && contains(github.base_ref, 'release/') }}
+
     steps:
-    
+
     - uses: actions/checkout@v2
-    
+
     - run: echo $GITHUB_HEAD_REF | sed 's|release/||' | { printf '::set-output name=TAG_NAME::'; cat; }
-    
+      id: output
+
     - uses: softprops/action-gh-release@v1
       with:
-        tag_name: ${{ steps.release.outputs.TAG_NAME }}
+        tag_name: ${{ steps.output.outputs.TAG_NAME }}
