@@ -26,9 +26,6 @@ jobs:
 
     - uses: actions/checkout@v2
 
-    - run: echo $GITHUB_HEAD_REF | sed 's|release/||' | { printf '::set-output name=TAG_NAME::'; cat; }
-      id: output
-
     - uses: softprops/action-gh-release@v1
-      with:
-        tag_name: ${{ steps.output.outputs.TAG_NAME }}
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
