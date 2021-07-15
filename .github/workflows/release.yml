@@ -1,8 +1,7 @@
 name: Release
 
 on:
-  push:
-    tags:
+  create:
   workflow_dispatch:
 
 jobs:
@@ -12,6 +11,8 @@ jobs:
     name: Release
 
     runs-on: ubuntu-latest
+
+    if: ${{ github.ref == 'refs/tags/*' }}
 
     steps:
 
