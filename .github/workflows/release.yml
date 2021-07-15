@@ -14,8 +14,6 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    # if: ${{ github.event.pull_request.merged == true && github.base_ref == 'main' && contains(github.base_ref, 'release/') }}
-
     steps:
 
     - run: |

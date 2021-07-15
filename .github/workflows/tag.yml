@@ -1,0 +1,31 @@
+name: Tag
+
+on:
+  pull_request:
+    types: [closed]
+  workflow_dispatch:
+
+jobs:
+
+  tag:
+
+    name: Tag
+
+    runs-on: ubuntu-latest
+
+    if: ${{ github.event.pull_request.merged == true && github.base_ref == 'main' && contains(github.head_ref, 'release/') }}
+
+    steps:
+
+    - run: |
+        echo ${{ github.event.pull_request.merged }}
+        echo ${{ github.base_ref }}
+        echo ${{ contains(github.head_ref, 'release/') }}
+        echo ${{ github.head_ref }}
+
+    - run: echo ${{ github.head_ref }} | sed 's|release/||' | { printf '::set-output name=TAG_NAME::'; cat; }
+      id: tag_name
+
+    - uses: actions/checkout@v2
+
+    - run: git tag ${{ steps.tag_name.outputs.TAG_NAME }} && git push origin ${{ steps.tag_name.outputs.TAG_NAME }}
