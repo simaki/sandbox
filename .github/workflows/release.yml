@@ -15,12 +15,6 @@ jobs:
 
     steps:
 
-    - run: |
-        echo ${{ github.event.pull_request.merged }}
-        echo ${{ github.base_ref }}
-        echo ${{ contains(github.base_ref, 'release/') }}
-        echo ${{ github.base_ref }}
-
     - uses: actions/checkout@v2
 
     - uses: softprops/action-gh-release@v1

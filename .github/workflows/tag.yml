@@ -17,12 +17,6 @@ jobs:
 
     steps:
 
-    - run: |
-        echo ${{ github.event.pull_request.merged }}
-        echo ${{ github.base_ref }}
-        echo ${{ contains(github.head_ref, 'release/') }}
-        echo ${{ github.head_ref }}
-
     - run: echo ${{ github.head_ref }} | sed 's|release/||' | { printf '::set-output name=TAG_NAME::'; cat; }
       id: tag_name
 
